@@ -1,0 +1,56 @@
+[gd_scene load_steps=31 format=3 uid="uid://dbhq2n11ehr5h"]
+
+[ext_resource type="Script" uid="uid://bxfqqq4xnhqed" path="res://scripts/player/player.gd" id="1_3vyb7"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="2_3v2ag"]
+[ext_resource type="Script" uid="uid://da15ehfeaybam" path="res://scripts/player/head.gd" id="2_dqkch"]
+[ext_resource type="Texture2D" uid="uid://cdesk7al58nhk" path="res://assets/textures/grid_orange.png" id="2_g2els"]
+[ext_resource type="Script" uid="uid://bh6acynj4u5t1" path="res://scripts/player/comps/mouse_capture.gd" id="2_qhqgy"]
+[ext_resource type="Script" uid="uid://bqdcdfyp6lw1s" path="res://scripts/player/camera.gd" id="5_i4ail"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="5_ur7pv"]
+[ext_resource type="Script" uid="uid://dxmhamc68385v" path="res://scripts/player/interaction_raycast.gd" id="6_60mlk"]
+[ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="6_y4r1p"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="7_d2wvv"]
+[ext_resource type="Script" uid="uid://c76se5jm4vx4w" path="res://scripts/player/comps/refs.gd" id="7_l71n6"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="8_3v2ag"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="9_jej6c"]
+[ext_resource type="Script" uid="uid://c3fm0odbb6ere" path="res://scripts/player/state_machine/state_machine.gd" id="10_d2wvv"]
+[ext_resource type="Script" uid="uid://qqw02gdk6hsr" path="res://scripts/player/state_machine/idle.gd" id="11_d2wvv"]
+[ext_resource type="Script" uid="uid://cm81rehexoabr" path="res://scripts/player/state_machine/grounded.gd" id="12_fulsm"]
+[ext_resource type="Script" uid="uid://bi15ldbi2767j" path="res://scripts/player/state_machine/moving.gd" id="13_jej6c"]
+[ext_resource type="Script" uid="uid://c2lv4yourpcgm" path="res://scripts/player/state_machine/sprinting.gd" id="15_a8ls1"]
+[ext_resource type="Script" uid="uid://dg3dcrkf8mk54" path="res://scripts/player/state_machine/standing.gd" id="16_qfm1y"]
+[ext_resource type="Script" uid="uid://04bnsuqad2a7" path="res://scripts/player/state_machine/airborne.gd" id="17_4r5pv"]
+[ext_resource type="Script" uid="uid://mr52rb2khgqq" path="res://scripts/player/state_machine/ascending.gd" id="20_4ni07"]
+[ext_resource type="Script" uid="uid://c6tliinpupl77" path="res://scripts/player/state_machine/descending.gd" id="21_l71n6"]
+[ext_resource type="Script" uid="uid://qw7lsn3pql6t" path="res://scripts/player/state_machine/sliding.gd" id="22_4ni07"]
+[ext_resource type="Script" uid="uid://vbsuf6c8liof" path="res://scripts/player/state_machine/crouching.gd" id="22_a38lo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3vyb7"]
+albedo_texture = ExtResource("2_g2els")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_l71n6"]
+material = SubResource("StandardMaterial3D_3vyb7")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qhqgy"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ke2ow"]
+material = SubResource("StandardMaterial3D_3vyb7")
+height = 1.6
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qfm1y"]
+height = 1.6
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a38lo"]
+height = 1.9
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("state_chart", "standing_collision", "standing_mesh", "crouching_collision", "crouching_mesh", "crouch_check", "head", "camera", "interaction_raycast")]
+script = ExtResource("1_3vyb7")
+state_chart = NodePath("StateChart")
+standing_collision = NodePath("StandingCollision")
+standing_mesh = NodePath("StandingMesh")
+crouching_collision = NodePath("CrouchingCollision")
+crouching_mesh = NodePath("CrouchingMesh")
+crouch_check = NodePath("CrouchCheck")
+head = NodePath("Head")
+camera = NodePath("Head/Camera")
+i
