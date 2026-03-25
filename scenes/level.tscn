@@ -53,8 +53,7 @@ size = Vector3(10, 0.01, 10)
 material = ExtResource("2_b2cq8")
 
 [node name="wall" type="CSGBox3D" parent="stage/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -10, 5, -10)
-visible = false
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, -8, 5, -10)
 size = Vector3(10, 0.01, 10)
 material = ExtResource("2_b2cq8")
 
@@ -107,7 +106,7 @@ size = Vector3(2, 9, 2)
 material = ExtResource("2_b2cq8")
 
 [node name="Area3D" type="Area3D" parent="stage/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.240385)
 script = ExtResource("3_w8frs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="stage/CSGCombiner3D/Area3D"]
