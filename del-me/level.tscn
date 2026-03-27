@@ -1,0 +1,120 @@
+[gd_scene load_steps=11 format=3 uid="uid://82vjlxqlxgmi"]
+
+[ext_resource type="Texture2D" uid="uid://ly1ruj27e70h" path="res://assets/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="1_b2cq8"]
+[ext_resource type="Material" uid="uid://bk5m0ky08n7cc" path="res://assets/tres/grid.tres" id="2_b2cq8"]
+[ext_resource type="Script" uid="uid://c2rwtb4c441bo" path="res://del-me/boost_pad.gd" id="3_w8frs"]
+[ext_resource type="Texture2D" uid="uid://cdesk7al58nhk" path="res://assets/textures/grid_orange.png" id="4_mx8sn"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_xb4v1"]
+panorama = ExtResource("1_b2cq8")
+
+[sub_resource type="Sky" id="Sky_377w7"]
+sky_material = SubResource("PanoramaSkyMaterial_xb4v1")
+
+[sub_resource type="Environment" id="Environment_bovvr"]
+background_mode = 2
+sky = SubResource("Sky_377w7")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w7c3h"]
+size = Vector3(2, 0.2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppgk2"]
+albedo_texture = ExtResource("4_mx8sn")
+
+[sub_resource type="BoxMesh" id="BoxMesh_w8frs"]
+material = SubResource("StandardMaterial3D_ppgk2")
+
+[node name="level" type="Node3D"]
+
+[node name="env" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="env"]
+environment = SubResource("Environment_bovvr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="env"]
+transform = Transform3D(0.8305549, 0.47800547, -0.2858131, -0.13237715, 0.66791546, 0.7323696, 0.54097575, -0.57043815, 0.61801755, -33, 61, 45)
+shadow_enabled = true
+
+[node name="stage" type="Node3D" parent="."]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="stage"]
+use_collision = true
+
+[node name="floor" type="CSGBox3D" parent="stage/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 0)
+size = Vector3(100, 0.01, 100)
+material = ExtResource("2_b2cq8")
+
+[node name="crouch_check" type="CSGBox3D" parent="stage/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1.606, -10)
+size = Vector3(10, 0.01, 10)
+material = ExtResource("2_b2cq8")
+
+[node name="wall" type="CSGBox3D" parent="stage/CSGCombiner3D"]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, -8, 5, -10)
+size = Vector3(10, 0.01, 10)
+material = ExtResource("2_b2cq8")
+
+[node name="parkour" type="CSGCombiner3D" parent="stage/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="parkour1" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.5, -2.5)
+size = Vector3(2, 1, 2)
+material = ExtResource("2_b2cq8")
+
+[node name="parkour2" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 1, -2.5)
+size = Vector3(2, 2, 2)
+material = ExtResource("2_b2cq8")
+
+[node name="parkour3" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1.5, -2.5)
+size = Vector3(2, 3, 2)
+material = ExtResource("2_b2cq8")
+
+[node name="parkour4" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 2, -6)
+size = Vector3(2, 4, 2)
+material = ExtResource("2_b2cq8")
+
+[node name="parkour5" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 2.5, -10)
+size = Vector3(2, 5, 2)
+material = ExtResource("2_b2cq8")
+
+[node name="parkour6" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 3, -14)
+size = Vector3(2, 6, 2)
+material = ExtResource("2_b2cq8")
+
+[node name="parkour7" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3.5, -17.5)
+size = Vector3(2, 7, 2)
+material = ExtResource("2_b2cq8")
+
+[node name="parkour8" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 4, -17.5)
+size = Vector3(2, 8, 2)
+material = ExtResource("2_b2cq8")
+
+[node name="parkour9" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 4.5, -17.5)
+size = Vector3(2, 9, 2)
+material = ExtResource("2_b2cq8")
+
+[node name="Area3D" type="Area3D" parent="stage/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.240385)
+script = ExtResource("3_w8frs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="stage/CSGCombiner3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10000038, -0.99999994)
+shape = SubResource("BoxShape3D_w7c3h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="stage/CSGCombiner3D/Area3D"]
+transform = Transform3D(2, 0, 0, 0, 0.2, 0, 0, 0, 2, 0, 0.10000038, -0.99999994)
+mesh = SubResource("BoxMesh_w8frs")
+
+[connection signal="body_entered" from="stage/CSGCombiner3D/Area3D" to="stage/CSGCombiner3D/Area3D" method="_on_body_entered"]
