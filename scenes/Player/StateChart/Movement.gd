@@ -10,6 +10,7 @@ func _physics_process(delta: float) -> void:
 
 func _process(_delta: float) -> void:
 
+	stateChart.set_expression_property("dir", player.dir)
 	stateChart.set_expression_property("velocity length", player.velocity.length())
 	stateChart.set_expression_property("velocity", player.velocity)
 	stateChart.set_expression_property("sliding timer", player.sliding_timer)

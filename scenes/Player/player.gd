@@ -12,6 +12,7 @@ class_name Player
 @export var interaction_raycast: InteractionRaycast
 @export var grapple_raycast: RayCast3D
 @export var raycastWeapon: RayCast3D
+@export var hook_controller: HookController
 
 @export_group("Movement")
 @export var walking_speed := 5.0
@@ -84,30 +85,42 @@ var sliding_timer := 0.0
 func _physics_process(delta: float) -> void:
 	
 	var speed = walking_speed + speed_modifier
+	var control: float
 	
 	# gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta * gravity_modifier
 	
 	# jump
-	if Input.is_action_pressed("jump") and is_on_floor():
+	if Input.is_action_pressed("jump") and is_on_floor() and not hook_controller.is_hook_launched:
 		velocity.y = jump_velocity
-#
+
 	# input
 	dir_input = Input.get_vector("left", "right", "forward", "backward")
 	var target_dir = (transform.basis * Vector3(dir_input.x, 0, dir_input.y)).normalized()
-	var control = acceleration if is_on_floor() else air_acceleration
+	if is_on_floor():
+		control = acceleration
+	else:
+		# var spd = velocity.length()
+		if hook_controller.is_hook_launched:
+			control = 2.5
+		else:
+			control = air_acceleration
 	
 	if is_sliding: dir = dir_slide
 	else: dir = lerp(dir, target_dir, delta * control)
 	
-	if dir:
+	if hook_controller.is_hook_launched and not is_on_floor():
+		if dir:
+			velocity.x += dir.x * control * delta
+			velocity.z += dir.z * control * delta
+	elif dir:
 		velocity.x = dir.x * speed
 		velocity.z = dir.z * speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, deceleration * delta)
 		velocity.z = move_toward(velocity.z, 0, deceleration * delta)
-#
+
 	move_and_slide()
 
 func _process(_delta: float) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://micgwbpw0qyy"]
+[gd_scene format=4 uid="uid://micgwbpw0qyy"]
 
 [ext_resource type="Script" uid="uid://d3o2yavuspuxk" path="res://addons/destrohook/scripts/player.gd" id="1_5t7oi"]
 [ext_resource type="Texture2D" uid="uid://cl8rqkm7v50jl" path="res://addons/destrohook/textures/white_checkers.png" id="2_a4764"]
@@ -124,7 +124,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_b8m46")
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "hook_raycast", "crosshair", "hook_controller")]
+[node name="Player" type="CharacterBody3D" unique_id=1957920819 node_paths=PackedStringArray("camera", "hook_raycast", "crosshair", "hook_controller")]
 script = ExtResource("1_5t7oi")
 HOOK_AVAILIBLE_TEXTURE = ExtResource("3_k3ota")
 HOOK_NOT_AVAILIBLE_TEXTURE = ExtResource("3_ee8s0")
@@ -133,31 +133,31 @@ hook_raycast = NodePath("Camera/Hook Raycast")
 crosshair = NodePath("HUD/Crosshair")
 hook_controller = NodePath("HookController")
 
-[node name="Collider" type="CollisionShape3D" parent="."]
+[node name="Collider" type="CollisionShape3D" parent="." unique_id=1966302399]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_iop0k")
 
-[node name="body" type="MeshInstance3D" parent="."]
+[node name="body" type="MeshInstance3D" parent="." unique_id=1635642373]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 material_override = SubResource("StandardMaterial3D_5g242")
 mesh = SubResource("CapsuleMesh_rx8sc")
 
-[node name="Camera" type="Camera3D" parent="."]
+[node name="Camera" type="Camera3D" parent="." unique_id=1308895187]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
-[node name="Hook Raycast" type="RayCast3D" parent="Camera"]
+[node name="Hook Raycast" type="RayCast3D" parent="Camera" unique_id=1516565008]
 target_position = Vector3(0, 0, -50)
 
-[node name="HookController" type="Node" parent="." node_paths=PackedStringArray("player_body", "hook_raycast", "hook_source")]
+[node name="HookController" type="Node" parent="." unique_id=1705794868 node_paths=PackedStringArray("player_body", "hook_raycast", "hook_source")]
 script = ExtResource("2_yq2dk")
 hook_scene = ExtResource("3_ruq25")
 player_body = NodePath("..")
 hook_raycast = NodePath("../Camera/Hook Raycast")
 hook_source = NodePath("../ODM/HookRopeStart")
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1322171842]
 
-[node name="Crosshair" type="TextureRect" parent="HUD"]
+[node name="Crosshair" type="TextureRect" parent="HUD" unique_id=513288734]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -172,26 +172,26 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("3_k3ota")
 
-[node name="ODM" type="Node3D" parent="."]
+[node name="ODM" type="Node3D" parent="." unique_id=1154219252]
 transform = Transform3D(-0.75, 0, -6.55671e-08, 0, 0.75, 0, 6.55671e-08, 0, -0.75, -0.025331, 1, 0.153343)
 
-[node name="odm_blade_holder" type="MeshInstance3D" parent="ODM"]
+[node name="odm_blade_holder" type="MeshInstance3D" parent="ODM" unique_id=1564346438]
 transform = Transform3D(0, -1.49012e-08, 1, -0.34202, 0.939693, 1.49012e-08, -0.939693, -0.34202, 0, -0.558447, -0.9, 0.258447)
 material_override = SubResource("StandardMaterial3D_hpxpa")
 mesh = SubResource("ArrayMesh_68wjq")
 skeleton = NodePath("")
 
-[node name="odm_blade_holder_001" type="MeshInstance3D" parent="ODM"]
+[node name="odm_blade_holder_001" type="MeshInstance3D" parent="ODM" unique_id=1108316743]
 transform = Transform3D(0, -1.49012e-08, 1, -0.34202, 0.939693, 1.49012e-08, -0.939693, -0.34202, 0, 0.558447, -0.9, 0.258447)
 material_override = SubResource("StandardMaterial3D_ws7qf")
 mesh = SubResource("ArrayMesh_4tldf")
 skeleton = NodePath("")
 
-[node name="odb_grappler" type="MeshInstance3D" parent="ODM"]
+[node name="odb_grappler" type="MeshInstance3D" parent="ODM" unique_id=439636198]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.84288e-08, 0, -0.558099)
 material_override = SubResource("StandardMaterial3D_y2jmc")
 mesh = SubResource("ArrayMesh_cu5qh")
 skeleton = NodePath("")
 
-[node name="HookRopeStart" type="Marker3D" parent="ODM"]
+[node name="HookRopeStart" type="Marker3D" parent="ODM" unique_id=948246371]
 transform = Transform3D(-1.33333, 3.01689e-08, 1.12592e-07, 0, 1.2879, -0.345092, -1.16564e-07, -0.345092, -1.2879, -0.292669, 0.041883, 0.236053)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dbhq2n11ehr5h"]
+[gd_scene format=3 uid="uid://dbhq2n11ehr5h"]
 
 [ext_resource type="Script" uid="uid://bxfqqq4xnhqed" path="res://scenes/Player/player.gd" id="1_3vyb7"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="2_3v2ag"]
@@ -6,8 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://cdesk7al58nhk" path="res://assets/textures/grid_orange.png" id="2_g2els"]
 [ext_resource type="Script" uid="uid://4m7226i6rjyn" path="res://scenes/Player/Reticle.gd" id="3_wyey8"]
 [ext_resource type="Script" uid="uid://bqdcdfyp6lw1s" path="res://scenes/Player/Camera.gd" id="5_3v2ag"]
+[ext_resource type="Script" uid="uid://c1wfd0pg13fwx" path="res://addons/destrohook/scripts/hook_controller.gd" id="5_tayva"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="5_ur7pv"]
 [ext_resource type="Script" uid="uid://dxmhamc68385v" path="res://scenes/Player/interaction_raycast.gd" id="6_60mlk"]
+[ext_resource type="PackedScene" uid="uid://dlqm10204rcaq" path="res://addons/destrohook/scenes/hook.tscn" id="6_x8khf"]
 [ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="6_y4r1p"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="7_d2wvv"]
 [ext_resource type="PackedScene" uid="uid://b2xwmgpjwj75d" path="res://scenes/Weapons/Pistol/Pistol.tscn" id="7_jxtnq"]
@@ -34,7 +36,7 @@ height = 1.6
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a38lo"]
 height = 1.9
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("standing_collision", "standing_mesh", "crouching_collision", "crouching_mesh", "crouch_check", "head", "camera", "interaction_raycast", "grapple_raycast", "raycastWeapon")]
+[node name="Player" type="CharacterBody3D" unique_id=1153320824 node_paths=PackedStringArray("standing_collision", "standing_mesh", "crouching_collision", "crouching_mesh", "crouch_check", "head", "camera", "interaction_raycast", "grapple_raycast", "raycastWeapon", "hook_controller")]
 script = ExtResource("1_3vyb7")
 standing_collision = NodePath("StandingCollision")
 standing_mesh = NodePath("StandingMesh")
@@ -44,11 +46,12 @@ crouch_check = NodePath("CrouchCheck")
 head = NodePath("Neck/Head")
 camera = NodePath("Neck/Head/Eyes/Camera")
 interaction_raycast = NodePath("Neck/Head/Eyes/Camera/InteractionRaycast")
-grapple_raycast = NodePath("Neck/Head/Eyes/Camera/GrappleRaycast")
+grapple_raycast = NodePath("Neck/Head/Eyes/RaycastHook")
 raycastWeapon = NodePath("Neck/Head/Eyes/RaycastWeapon")
+hook_controller = NodePath("HookController")
 camera_zoom_speed = 0.1
 
-[node name="StateChartDebugger" parent="." instance=ExtResource("2_3v2ag")]
+[node name="StateChartDebugger" parent="." unique_id=1376064491 instance=ExtResource("2_3v2ag")]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -58,7 +61,7 @@ grow_horizontal = 1
 grow_vertical = 1
 initial_node_to_watch = NodePath("../StateChart")
 
-[node name="Reticle" type="Control" parent="."]
+[node name="Reticle" type="Control" parent="." unique_id=424572047]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,133 +70,145 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_wyey8")
 
-[node name="StandingMesh" type="MeshInstance3D" parent="."]
+[node name="StandingMesh" type="MeshInstance3D" parent="." unique_id=1502153401]
 mesh = SubResource("CapsuleMesh_l71n6")
 
-[node name="StandingCollision" type="CollisionShape3D" parent="."]
+[node name="StandingCollision" type="CollisionShape3D" parent="." unique_id=1194988801]
 shape = SubResource("CapsuleShape3D_qhqgy")
 
-[node name="CrouchingMesh" type="MeshInstance3D" parent="."]
+[node name="CrouchingMesh" type="MeshInstance3D" parent="." unique_id=1016615130]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 visible = false
 mesh = SubResource("CapsuleMesh_ke2ow")
 
-[node name="CrouchingCollision" type="CollisionShape3D" parent="."]
+[node name="CrouchingCollision" type="CollisionShape3D" parent="." unique_id=639365926]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 shape = SubResource("CapsuleShape3D_qfm1y")
 disabled = true
 debug_color = Color(0.9179666, 7.0752205e-05, 0.7056527, 0.41960785)
 
-[node name="CrouchCheck" type="ShapeCast3D" parent="."]
+[node name="CrouchCheck" type="ShapeCast3D" parent="." unique_id=1040849296]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 shape = SubResource("CapsuleShape3D_a38lo")
 target_position = Vector3(0, 0, 0)
 
-[node name="Neck" type="Node3D" parent="."]
+[node name="HookController" type="Node" parent="." unique_id=50122835 node_paths=PackedStringArray("player_body", "hook_raycast", "hook_source")]
+script = ExtResource("5_tayva")
+hook_scene = ExtResource("6_x8khf")
+player_body = NodePath("..")
+hook_raycast = NodePath("../Neck/Head/Eyes/RaycastHook")
+hook_source = NodePath("../HookRopeStart")
+
+[node name="HookRopeStart" type="Marker3D" parent="." unique_id=1722666786]
+transform = Transform3D(-1.33333, 3.01689e-08, 1.12592e-07, 0, 1.2879, -0.345092, -1.16564e-07, -0.345092, -1.2879, -0.292669, 0.041883, 0.236053)
+
+[node name="Neck" type="Node3D" parent="." unique_id=1468627211]
 unique_name_in_owner = true
 
-[node name="Head" type="Node3D" parent="Neck" node_paths=PackedStringArray("player", "camera")]
+[node name="Head" type="Node3D" parent="Neck" unique_id=563367191 node_paths=PackedStringArray("player", "camera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("2_dqkch")
 player = NodePath("../..")
 camera = NodePath("Eyes/Camera")
 
-[node name="Eyes" type="Node3D" parent="Neck/Head"]
+[node name="Eyes" type="Node3D" parent="Neck/Head" unique_id=413538864]
 unique_name_in_owner = true
 
-[node name="Camera" type="Camera3D" parent="Neck/Head/Eyes" node_paths=PackedStringArray("player")]
+[node name="Camera" type="Camera3D" parent="Neck/Head/Eyes" unique_id=1290748798 node_paths=PackedStringArray("player")]
 script = ExtResource("5_3v2ag")
 player = NodePath("../../../..")
 
-[node name="InteractionRaycast" type="RayCast3D" parent="Neck/Head/Eyes/Camera"]
+[node name="InteractionRaycast" type="RayCast3D" parent="Neck/Head/Eyes/Camera" unique_id=1083466788]
+visible = false
 target_position = Vector3(0, 0, -3)
 script = ExtResource("6_60mlk")
 
-[node name="GrappleRaycast" type="RayCast3D" parent="Neck/Head/Eyes/Camera"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
-target_position = Vector3(0, -30, 0)
-debug_shape_custom_color = Color(0, 0, 1, 1)
-
-[node name="Pistol" parent="Neck/Head/Eyes" instance=ExtResource("7_jxtnq")]
+[node name="Pistol" parent="Neck/Head/Eyes" unique_id=866372479 instance=ExtResource("7_jxtnq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.25, -0.6)
 
-[node name="RaycastWeapon" type="RayCast3D" parent="Neck/Head/Eyes"]
+[node name="RaycastHook" type="RayCast3D" parent="Neck/Head/Eyes" unique_id=808345719]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+target_position = Vector3(0, -30, 0)
+debug_shape_custom_color = Color(0.29379457, 0.591476, 0, 1)
+
+[node name="RaycastWeapon" type="RayCast3D" parent="Neck/Head/Eyes" unique_id=2066411247]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+visible = false
 target_position = Vector3(0, 100, 0)
 
-[node name="Cmps" type="Node" parent="."]
+[node name="Cmps" type="Node" parent="." unique_id=1277642584]
 
-[node name="Health" type="Node" parent="Cmps"]
+[node name="Health" type="Node" parent="Cmps" unique_id=1813306500]
 script = ExtResource("8_t6q27")
 
-[node name="StateChart" type="Node" parent="."]
+[node name="StateChart" type="Node" parent="." unique_id=1699404468]
 script = ExtResource("5_ur7pv")
 metadata/_custom_type_script = "uid://couw105c3bde4"
 
-[node name="Root" type="Node" parent="StateChart"]
+[node name="Root" type="Node" parent="StateChart" unique_id=1448361109]
 script = ExtResource("6_y4r1p")
 metadata/_custom_type_script = "uid://c1vp0ojjvaby1"
 
-[node name="Movement" type="Node" parent="StateChart/Root"]
+[node name="Movement" type="Node" parent="StateChart/Root" unique_id=1284559266]
 script = ExtResource("7_d2wvv")
 initial_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://jk2jm1g6q853"
 
-[node name="Code" type="Node" parent="StateChart/Root/Movement" node_paths=PackedStringArray("player", "stateChart")]
+[node name="Code" type="Node" parent="StateChart/Root/Movement" unique_id=850676882 node_paths=PackedStringArray("player", "stateChart")]
 script = ExtResource("13_f1ej7")
 player = NodePath("../../../..")
 stateChart = NodePath("../../..")
 
-[node name="Idle" type="Node" parent="StateChart/Root/Movement"]
+[node name="Idle" type="Node" parent="StateChart/Root/Movement" unique_id=1578691451]
 script = ExtResource("8_3v2ag")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
-[node name="toIdle" type="Node" parent="StateChart/Root/Movement"]
+[node name="toIdle" type="Node" parent="StateChart/Root/Movement" unique_id=231691349]
 script = ExtResource("15_oprun")
 to = NodePath("../Idle")
 event = &"toIdle"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="Walking" type="Node" parent="StateChart/Root/Movement"]
+[node name="Walking" type="Node" parent="StateChart/Root/Movement" unique_id=324404182]
 script = ExtResource("8_3v2ag")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
-[node name="toWalking" type="Node" parent="StateChart/Root/Movement"]
+[node name="toWalking" type="Node" parent="StateChart/Root/Movement" unique_id=873265068]
 script = ExtResource("15_oprun")
 to = NodePath("../Walking")
 event = &"toWalking"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="Sprinting" type="Node" parent="StateChart/Root/Movement"]
+[node name="Sprinting" type="Node" parent="StateChart/Root/Movement" unique_id=312859255]
 script = ExtResource("8_3v2ag")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
-[node name="toSprinting" type="Node" parent="StateChart/Root/Movement"]
+[node name="toSprinting" type="Node" parent="StateChart/Root/Movement" unique_id=914200784]
 script = ExtResource("15_oprun")
 to = NodePath("../Sprinting")
 event = &"toSprinting"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="Crouching" type="Node" parent="StateChart/Root/Movement"]
+[node name="Crouching" type="Node" parent="StateChart/Root/Movement" unique_id=516074921]
 script = ExtResource("8_3v2ag")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
-[node name="toCrouching" type="Node" parent="StateChart/Root/Movement"]
+[node name="toCrouching" type="Node" parent="StateChart/Root/Movement" unique_id=1856210601]
 script = ExtResource("15_oprun")
 to = NodePath("../Crouching")
 event = &"toCrouching"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="Sliding" type="Node" parent="StateChart/Root/Movement"]
+[node name="Sliding" type="Node" parent="StateChart/Root/Movement" unique_id=1157264275]
 script = ExtResource("8_3v2ag")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
-[node name="toSliding" type="Node" parent="StateChart/Root/Movement"]
+[node name="toSliding" type="Node" parent="StateChart/Root/Movement" unique_id=985191081]
 script = ExtResource("15_oprun")
 to = NodePath("../Sliding")
 event = &"toSliding"
