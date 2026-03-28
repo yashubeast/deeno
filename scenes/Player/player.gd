@@ -20,12 +20,19 @@ class_name Player
 @export var crouching_speed := -3.0
 @export var sliding_speed := 3.0
 @export var sliding_time := 1.0
+@export var swinging_speed := 10.0
 #
-@export var acceleration := 10.0
-@export var air_acceleration := 1.0
-@export var deceleration := 10.0
 @export var jump_velocity := 5.0
 @export var gravity_modifier := 1.3
+@export var acceleration := 10.0
+@export var deceleration := 8.0
+
+@export var control_ground := 1.0
+@export var control_slow := 0.05
+@export var control_medium := 0.15
+@export var control_fast := 0.25
+@export var control_slow_speed := 15.0
+@export var control_medium_speed := 20.0
 @export_group("Grapple")
 @export var grapple_rest_length := 2.0
 @export var grapple_stiffness := 10.0
@@ -70,6 +77,7 @@ class_name Player
 @export var freelook_snap_back_speed := 10.0
 
 var speed_modifier: float
+var speed_modifier_swinging: float
 var current_fall_velocity: float
 var slide_dir := Vector3.ZERO
 var is_sliding := false
@@ -84,42 +92,44 @@ var sliding_timer := 0.0
 
 func _physics_process(delta: float) -> void:
 	
-	var speed = walking_speed + speed_modifier
+	var speed = walking_speed + speed_modifier + speed_modifier_swinging
 	var control: float
 	
+	# input
+	dir_input = Input.get_vector("left", "right", "forward", "backward")
+	dir = (transform.basis * Vector3(dir_input.x, 0, dir_input.y)).normalized()
+
+	# decide control
+	if is_on_floor():
+		control = control_ground
+	elif velocity.length() < control_slow_speed:
+		control = control_slow
+	elif velocity.length() < control_medium_speed:
+		control = control_medium
+	else:
+		control = control_fast
+
+	# decide speed_modifier_swinging
+	if hook_controller.is_hook_launched and !is_on_floor():
+		speed_modifier_swinging = swinging_speed
+	else: speed_modifier_swinging = 0.0
+	
+	# fixed dir if sliding
+	if is_sliding: dir = dir_slide
+	
+	if dir_input.length() != 0 or is_sliding:
+		velocity.x = lerpf(velocity.x, dir.x * speed, acceleration * control * delta)
+		velocity.z = lerpf(velocity.z, dir.z * speed, acceleration * control * delta)
+	else:
+		velocity.x = lerpf(velocity.x, 0, deceleration * control * delta)
+		velocity.z = lerpf(velocity.z, 0, deceleration * control * delta)
+
 	# gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta * gravity_modifier
-	
 	# jump
-	if Input.is_action_pressed("jump") and is_on_floor() and not hook_controller.is_hook_launched:
+	elif Input.is_action_pressed("jump") and not hook_controller.is_hook_launched:
 		velocity.y = jump_velocity
-
-	# input
-	dir_input = Input.get_vector("left", "right", "forward", "backward")
-	var target_dir = (transform.basis * Vector3(dir_input.x, 0, dir_input.y)).normalized()
-	if is_on_floor():
-		control = acceleration
-	else:
-		# var spd = velocity.length()
-		if hook_controller.is_hook_launched:
-			control = 2.5
-		else:
-			control = air_acceleration
-	
-	if is_sliding: dir = dir_slide
-	else: dir = lerp(dir, target_dir, delta * control)
-	
-	if hook_controller.is_hook_launched and not is_on_floor():
-		if dir:
-			velocity.x += dir.x * control * delta
-			velocity.z += dir.z * control * delta
-	elif dir:
-		velocity.x = dir.x * speed
-		velocity.z = dir.z * speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, deceleration * delta)
-		velocity.z = move_toward(velocity.z, 0, deceleration * delta)
 
 	move_and_slide()
 

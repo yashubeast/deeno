@@ -11,6 +11,7 @@ func _physics_process(delta: float) -> void:
 func _process(_delta: float) -> void:
 
 	stateChart.set_expression_property("dir", player.dir)
+	stateChart.set_expression_property("dir input", player.dir_input)
 	stateChart.set_expression_property("velocity length", player.velocity.length())
 	stateChart.set_expression_property("velocity", player.velocity)
 	stateChart.set_expression_property("sliding timer", player.sliding_timer)
@@ -21,7 +22,7 @@ func _process(_delta: float) -> void:
 
 func _on_idle_state_physics_processing(_delta: float) -> void:
 	if Input.is_action_pressed("crouch"): stateChart.send_event("toCrouching")
-	elif player.velocity.length() > 0.0:
+	elif player.dir.length() > 0.0:
 		if Input.is_action_pressed("sprint"): stateChart.send_event("toSprinting")
 		else: stateChart.send_event("toWalking")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://82vjlxqlxgmi"]
+[gd_scene format=3 uid="uid://82vjlxqlxgmi"]
 
 [ext_resource type="Texture2D" uid="uid://ly1ruj27e70h" path="res://assets/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="1_b2cq8"]
 [ext_resource type="Material" uid="uid://bk5m0ky08n7cc" path="res://assets/tres/grid.tres" id="2_b2cq8"]
@@ -26,95 +26,115 @@ albedo_texture = ExtResource("4_mx8sn")
 [sub_resource type="BoxMesh" id="BoxMesh_w8frs"]
 material = SubResource("StandardMaterial3D_ppgk2")
 
-[node name="level" type="Node3D"]
+[node name="level" type="Node3D" unique_id=1703914297]
 
-[node name="env" type="Node3D" parent="."]
+[node name="env" type="Node3D" parent="." unique_id=1562617733]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="env"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="env" unique_id=2104417158]
 environment = SubResource("Environment_bovvr")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="env"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="env" unique_id=2109400138]
 transform = Transform3D(0.8305549, 0.47800547, -0.2858131, -0.13237715, 0.66791546, 0.7323696, 0.54097575, -0.57043815, 0.61801755, -33, 61, 45)
 shadow_enabled = true
 
-[node name="stage" type="Node3D" parent="."]
+[node name="stage" type="Node3D" parent="." unique_id=770027967]
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="stage"]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="stage" unique_id=2034107176]
 use_collision = true
 
-[node name="floor" type="CSGBox3D" parent="stage/CSGCombiner3D"]
+[node name="floor" type="CSGBox3D" parent="stage/CSGCombiner3D" unique_id=1576627307]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 0)
 size = Vector3(100, 0.01, 100)
 material = ExtResource("2_b2cq8")
 
-[node name="crouch_check" type="CSGBox3D" parent="stage/CSGCombiner3D"]
+[node name="crouch_check" type="CSGBox3D" parent="stage/CSGCombiner3D" unique_id=1279312698]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1.606, -10)
 size = Vector3(10, 0.01, 10)
 material = ExtResource("2_b2cq8")
 
-[node name="wall" type="CSGBox3D" parent="stage/CSGCombiner3D"]
+[node name="wall" type="CSGBox3D" parent="stage/CSGCombiner3D" unique_id=952570011]
 transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, -8, 5, -10)
 size = Vector3(10, 0.01, 10)
 material = ExtResource("2_b2cq8")
 
-[node name="parkour" type="CSGCombiner3D" parent="stage/CSGCombiner3D"]
+[node name="parkour" type="CSGCombiner3D" parent="stage/CSGCombiner3D" unique_id=1766023761]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 
-[node name="parkour1" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour"]
+[node name="parkour1" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour" unique_id=322725189]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.5, -2.5)
 size = Vector3(2, 1, 2)
 material = ExtResource("2_b2cq8")
 
-[node name="parkour2" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour"]
+[node name="parkour2" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour" unique_id=1627230137]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 1, -2.5)
 size = Vector3(2, 2, 2)
 material = ExtResource("2_b2cq8")
 
-[node name="parkour3" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour"]
+[node name="parkour3" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour" unique_id=2008621388]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1.5, -2.5)
 size = Vector3(2, 3, 2)
 material = ExtResource("2_b2cq8")
 
-[node name="parkour4" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour"]
+[node name="parkour4" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour" unique_id=1966937091]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 2, -6)
 size = Vector3(2, 4, 2)
 material = ExtResource("2_b2cq8")
 
-[node name="parkour5" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour"]
+[node name="parkour5" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour" unique_id=1588608924]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 2.5, -10)
 size = Vector3(2, 5, 2)
 material = ExtResource("2_b2cq8")
 
-[node name="parkour6" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour"]
+[node name="parkour6" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour" unique_id=470454146]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 3, -14)
 size = Vector3(2, 6, 2)
 material = ExtResource("2_b2cq8")
 
-[node name="parkour7" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour"]
+[node name="parkour7" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour" unique_id=1503019597]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3.5, -17.5)
 size = Vector3(2, 7, 2)
 material = ExtResource("2_b2cq8")
 
-[node name="parkour8" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour"]
+[node name="parkour8" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour" unique_id=1759665864]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 4, -17.5)
 size = Vector3(2, 8, 2)
 material = ExtResource("2_b2cq8")
 
-[node name="parkour9" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour"]
+[node name="parkour9" type="CSGBox3D" parent="stage/CSGCombiner3D/parkour" unique_id=738644678]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 4.5, -17.5)
 size = Vector3(2, 9, 2)
 material = ExtResource("2_b2cq8")
 
-[node name="Area3D" type="Area3D" parent="stage/CSGCombiner3D"]
+[node name="Area3D" type="Area3D" parent="stage/CSGCombiner3D" unique_id=856075240]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.240385)
 script = ExtResource("3_w8frs")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="stage/CSGCombiner3D/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="stage/CSGCombiner3D/Area3D" unique_id=2059243911]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10000038, -0.99999994)
 shape = SubResource("BoxShape3D_w7c3h")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="stage/CSGCombiner3D/Area3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="stage/CSGCombiner3D/Area3D" unique_id=58107615]
 transform = Transform3D(2, 0, 0, 0, 0.2, 0, 0, 0, 2, 0, 0.10000038, -0.99999994)
 mesh = SubResource("BoxMesh_w8frs")
+
+[node name="hook" type="CSGCombiner3D" parent="stage/CSGCombiner3D" unique_id=2039614750]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 16)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="stage/CSGCombiner3D/hook" unique_id=888405394]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, -5, 4)
+size = Vector3(8, 0.1, 8)
+material = ExtResource("2_b2cq8")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="stage/CSGCombiner3D/hook" unique_id=1790883204]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, -5, 4)
+size = Vector3(8, 0.1, 8)
+material = ExtResource("2_b2cq8")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="stage/CSGCombiner3D/hook" unique_id=2050874385]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+material = ExtResource("2_b2cq8")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="stage/CSGCombiner3D/hook" unique_id=1171678066]
+material = ExtResource("2_b2cq8")
 
 [connection signal="body_entered" from="stage/CSGCombiner3D/Area3D" to="stage/CSGCombiner3D/Area3D" method="_on_body_entered"]

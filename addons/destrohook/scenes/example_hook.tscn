@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b2ns0ejqc0dlq"]
 
-[ext_resource type="PackedScene" uid="uid://micgwbpw0qyy" path="res://addons/destrohook/scenes/player.tscn" id="1_gimlx"]
+[ext_resource type="PackedScene" uid="uid://micgwbpw0qyy" path="res://addons/destrohook/scenes/player.tscn" id="1_70pls"]
 [ext_resource type="Texture2D" uid="uid://cl8rqkm7v50jl" path="res://addons/destrohook/textures/white_checkers.png" id="2_tppjk"]
 [ext_resource type="Texture2D" uid="uid://b5fbiplwhvry" path="res://addons/destrohook/textures/orange_checkers.png" id="3_83uce"]
 [ext_resource type="Texture2D" uid="uid://bxjv1l4qsxhom" path="res://addons/destrohook/textures/blue_checkers.png" id="4_jomu1"]
@@ -54,6 +54,8 @@ environment = SubResource("Environment_kb545")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 10, 0)
 shadow_enabled = true
 
+[node name="Player" parent="Environment" unique_id=1957920819 instance=ExtResource("1_70pls")]
+
 [node name="Credits" type="Label3D" parent="." unique_id=895063939]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3, 6)
 pixel_size = 0.01
@@ -66,11 +68,6 @@ Special thanks:
 LowRezCat for making the template
 I based this on"
 outline_size = 16
-
-[node name="Player" parent="." unique_id=535823114 instance=ExtResource("1_gimlx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
-collision_layer = 0
-mouse_sensetivity = 1.5
 
 [node name="test" type="Node" parent="." unique_id=1573139820]
 
