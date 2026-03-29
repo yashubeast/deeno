@@ -88,18 +88,19 @@ var dir_input := Vector2.ZERO
 var dir_slide := Vector3.ZERO
 var freelook := false
 var sliding_timer := 0.0
-#var _movement_velocity := Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
 	
 	var speed = walking_speed + speed_modifier + speed_modifier_swinging
 	var control: float
+	var velocity_preland: Vector3 = velocity
 	
-	# input
+	# take input
 	dir_input = Input.get_vector("left", "right", "forward", "backward")
 	dir = (transform.basis * Vector3(dir_input.x, 0, dir_input.y)).normalized()
 
-	# decide control
+	# decide control ( control is how much control you have over movement depending on speed/Y-level )
+	# this is not relative to acceleration / deceleration
 	if is_on_floor():
 		control = control_ground
 	elif velocity.length() < control_slow_speed:
@@ -110,16 +111,25 @@ func _physics_process(delta: float) -> void:
 		control = control_fast
 
 	# decide speed_modifier_swinging
+	# higher max speed while swinging
 	if hook_controller.is_hook_launched and !is_on_floor():
 		speed_modifier_swinging = swinging_speed
 	else: speed_modifier_swinging = 0.0
 	
 	# fixed dir if sliding
+	# TODO: change this concept so sliding just happens relative to body yaw
+	# and while freelook / sliding you ONLY rotate head
 	if is_sliding: dir = dir_slide
-	
+
+	# jump
+	if Input.is_action_pressed("jump") and not hook_controller.is_hook_launched and is_on_floor():
+		velocity.y = jump_velocity
+
 	if dir_input.length() != 0 or is_sliding:
-		velocity.x = lerpf(velocity.x, dir.x * speed, acceleration * control * delta)
-		velocity.z = lerpf(velocity.z, dir.z * speed, acceleration * control * delta)
+		var x = dir.x * speed
+		var z = dir.z * speed
+		velocity.x = lerpf(velocity.x, x, acceleration * control * delta)
+		velocity.z = lerpf(velocity.z, z, acceleration * control * delta)
 	else:
 		velocity.x = lerpf(velocity.x, 0, deceleration * control * delta)
 		velocity.z = lerpf(velocity.z, 0, deceleration * control * delta)
@@ -127,11 +137,16 @@ func _physics_process(delta: float) -> void:
 	# gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta * gravity_modifier
-	# jump
-	elif Input.is_action_pressed("jump") and not hook_controller.is_hook_launched:
-		velocity.y = jump_velocity
 
 	move_and_slide()
+
+	if is_on_floor() and velocity_preland.y < fall_velocity_threshold:
+		var speed_fall = abs(velocity_preland.y)
+		var dir_horizontal = Vector3(velocity_preland.x, 0, velocity_preland.z).normalized()
+		if dir_horizontal == Vector3.ZERO:
+			dir_horizontal = -global_transform.basis.z
+		velocity.x += dir_horizontal.x * speed_fall * 1.0
+		velocity.z += dir_horizontal.z * speed_fall * 1.0
 
 func _process(_delta: float) -> void:
 	
