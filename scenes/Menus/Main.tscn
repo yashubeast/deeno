@@ -1,10 +1,29 @@
 [gd_scene format=3 uid="uid://bbqlulta1ghpn"]
 
-[ext_resource type="Theme" uid="uid://cq70t02lfvsgd" path="res://scenes/Menus/Theme.tres" id="1_vw8m5"]
+[ext_resource type="FontFile" uid="uid://d2d7mn8spf2lb" path="res://assets/GrapeSoda.ttf" id="1_vw8m5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vw8m5"]
+bg_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_axmk1"]
+bg_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrx7u"]
+bg_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(1, 0.33333334, 1, 1)
+shadow_size = 8
 
 [node name="Main" type="Control" unique_id=118939837]
 layout_mode = 3
@@ -27,39 +46,49 @@ offset_right = 170.0
 offset_bottom = 164.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 16
 
 [node name="Start" type="Button" parent="VBoxContainer" unique_id=1625992762]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("1_vw8m5")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_vw8m5")
+theme_override_font_sizes/font_size = 80
 theme_override_styles/normal = SubResource("StyleBoxFlat_vw8m5")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_axmk1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yrx7u")
+theme_override_styles/focus = SubResource("StyleBoxFlat_yrx7u")
 text = "Start"
 
 [node name="Options" type="Button" parent="VBoxContainer" unique_id=368678768]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("1_vw8m5")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_vw8m5")
+theme_override_font_sizes/font_size = 80
 theme_override_styles/normal = SubResource("StyleBoxFlat_vw8m5")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_axmk1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yrx7u")
+theme_override_styles/focus = SubResource("StyleBoxFlat_yrx7u")
 text = "Options"
 
 [node name="Quit" type="Button" parent="VBoxContainer" unique_id=85956427]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("1_vw8m5")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_vw8m5")
+theme_override_font_sizes/font_size = 80
 theme_override_styles/normal = SubResource("StyleBoxFlat_vw8m5")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_axmk1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yrx7u")
+theme_override_styles/focus = SubResource("StyleBoxFlat_yrx7u")
 text = "Quit"
