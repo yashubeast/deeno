@@ -2,8 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://ly1ruj27e70h" path="res://assets/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="1_b2cq8"]
 [ext_resource type="Material" uid="uid://bk5m0ky08n7cc" path="res://assets/tres/grid.tres" id="2_b2cq8"]
-[ext_resource type="Script" uid="uid://c2rwtb4c441bo" path="res://del-me/boost_pad.gd" id="3_w8frs"]
-[ext_resource type="Texture2D" uid="uid://cdesk7al58nhk" path="res://assets/textures/grid_orange.png" id="4_mx8sn"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_xb4v1"]
 panorama = ExtResource("1_b2cq8")
@@ -17,16 +15,7 @@ sky = SubResource("Sky_377w7")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_w7c3h"]
-size = Vector3(2, 0.2, 2)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppgk2"]
-albedo_texture = ExtResource("4_mx8sn")
-
-[sub_resource type="BoxMesh" id="BoxMesh_w8frs"]
-material = SubResource("StandardMaterial3D_ppgk2")
-
-[node name="level" type="Node3D" unique_id=1703914297]
+[node name="Level" type="Node3D" unique_id=1703914297]
 
 [node name="env" type="Node3D" parent="." unique_id=1562617733]
 
@@ -105,18 +94,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 4.5, -17.5)
 size = Vector3(2, 9, 2)
 material = ExtResource("2_b2cq8")
 
-[node name="Area3D" type="Area3D" parent="stage/CSGCombiner3D" unique_id=856075240]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.240385)
-script = ExtResource("3_w8frs")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="stage/CSGCombiner3D/Area3D" unique_id=2059243911]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10000038, -0.99999994)
-shape = SubResource("BoxShape3D_w7c3h")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="stage/CSGCombiner3D/Area3D" unique_id=58107615]
-transform = Transform3D(2, 0, 0, 0, 0.2, 0, 0, 0, 2, 0, 0.10000038, -0.99999994)
-mesh = SubResource("BoxMesh_w8frs")
-
 [node name="hook" type="CSGCombiner3D" parent="stage/CSGCombiner3D" unique_id=2039614750]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 16)
 
@@ -136,5 +113,3 @@ material = ExtResource("2_b2cq8")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="stage/CSGCombiner3D/hook" unique_id=1171678066]
 material = ExtResource("2_b2cq8")
-
-[connection signal="body_entered" from="stage/CSGCombiner3D/Area3D" to="stage/CSGCombiner3D/Area3D" method="_on_body_entered"]

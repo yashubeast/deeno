@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://bbqlulta1ghpn"]
+
+[ext_resource type="Theme" uid="uid://cq70t02lfvsgd" path="res://scenes/Menus/Theme.tres" id="1_vw8m5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vw8m5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_axmk1"]
+
+[node name="Main" type="Control" unique_id=118939837]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1207488380]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -170.0
+offset_top = -164.5
+offset_right = 170.0
+offset_bottom = 164.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start" type="Button" parent="VBoxContainer" unique_id=1625992762]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_vw8m5")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_vw8m5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_axmk1")
+text = "Start"
+
+[node name="Options" type="Button" parent="VBoxContainer" unique_id=368678768]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_vw8m5")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_vw8m5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_axmk1")
+text = "Options"
+
+[node name="Quit" type="Button" parent="VBoxContainer" unique_id=85956427]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_vw8m5")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_vw8m5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_axmk1")
+text = "Quit"

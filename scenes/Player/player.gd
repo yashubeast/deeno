@@ -9,7 +9,6 @@ class_name Player
 @export var crouch_check: ShapeCast3D
 @export var head: Head
 @export var camera: Camera3D
-@export var interaction_raycast: InteractionRaycast
 @export var grapple_raycast: RayCast3D
 @export var raycastWeapon: RayCast3D
 @export var hook_controller: HookController
