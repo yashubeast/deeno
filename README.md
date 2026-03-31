@@ -3,6 +3,9 @@ godot project
 these are all the features i have in mind atleast
 
 # player hook
+- hook comes from the handle of the sword ( like from karlson )
+- u can throw the sword and it gets anchored in ground damaging on its way ( grapple is hooked to you )
+  then u can pull the grapple to get moved towards the sword or pull the sword towards u
 - gravity based ( swinging and stuff )
 - you can pull towards the hook ( for momentum ? )
 - like ODM hooks from attack on titan
