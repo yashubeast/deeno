@@ -1,6 +1,12 @@
 [gd_scene format=3 uid="uid://bbqlulta1ghpn"]
 
+[ext_resource type="Texture2D" uid="uid://dt738jxoh13tp" path="res://assets/textures/astolfo_banner.webp" id="1_axmk1"]
 [ext_resource type="FontFile" uid="uid://d2d7mn8spf2lb" path="res://assets/GrapeSoda.ttf" id="1_vw8m5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vw8m5"]
+font = ExtResource("1_vw8m5")
+font_size = 128
+font_color = Color(1, 0.49803922, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vw8m5"]
 bg_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
@@ -33,22 +39,39 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1207488380]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1299425890]
+position = Vector2(343, 324)
+scale = Vector2(1.5377538, 1.5377538)
+texture = ExtResource("1_axmk1")
+
+[node name="VBoxContainerMain" type="VBoxContainer" parent="." unique_id=1004410446]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -170.0
-offset_top = -164.5
-offset_right = 170.0
-offset_bottom = 164.5
+offset_left = -120.0
+offset_top = -236.5
+offset_right = 120.0
+offset_bottom = 236.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 73
+
+[node name="Label" type="Label" parent="VBoxContainerMain" unique_id=1452585089]
+layout_mode = 2
+text = "some game idk"
+label_settings = SubResource("LabelSettings_vw8m5")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainerMain" unique_id=1207488380]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/separation = 16
 
-[node name="Start" type="Button" parent="VBoxContainer" unique_id=1625992762]
+[node name="Start" type="Button" parent="VBoxContainerMain/VBoxContainer" unique_id=1625992762]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -63,7 +86,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_yrx7u")
 theme_override_styles/focus = SubResource("StyleBoxFlat_yrx7u")
 text = "Start"
 
-[node name="Options" type="Button" parent="VBoxContainer" unique_id=368678768]
+[node name="Options" type="Button" parent="VBoxContainerMain/VBoxContainer" unique_id=368678768]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -78,7 +101,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_yrx7u")
 theme_override_styles/focus = SubResource("StyleBoxFlat_yrx7u")
 text = "Options"
 
-[node name="Quit" type="Button" parent="VBoxContainer" unique_id=85956427]
+[node name="Quit" type="Button" parent="VBoxContainerMain/VBoxContainer" unique_id=85956427]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)

@@ -46,3 +46,4 @@ aka u can slide diagonally instaed of having to look-in-a-direction->slide->look
 - charged-punch or charged-sword-attack or shotgun to\
 get thrown in the other direction ( aim towards ground = get flung in air )
 - frieren hexagon magic shield
+- a shuriken which u can teleport to ( naruto's dad ability )

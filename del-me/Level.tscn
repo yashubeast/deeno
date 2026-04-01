@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://82vjlxqlxgmi"]
 
-[ext_resource type="Texture2D" uid="uid://ly1ruj27e70h" path="res://assets/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="1_b2cq8"]
-[ext_resource type="Material" uid="uid://bk5m0ky08n7cc" path="res://assets/tres/grid.tres" id="2_b2cq8"]
+[ext_resource type="Texture2D" uid="uid://ly1ruj27e70h" path="res://assets/sky.hdr" id="1_b2cq8"]
+[ext_resource type="Material" uid="uid://bk5m0ky08n7cc" path="res://assets/textures/grid.tres" id="2_b2cq8"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_xb4v1"]
 panorama = ExtResource("1_b2cq8")
