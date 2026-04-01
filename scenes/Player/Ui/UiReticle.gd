@@ -1,5 +1,5 @@
 extends Control
-class_name Reticle
+class_name ReticleHi
 
 @export var my_size: float = 1.0
 @export var gap: float = 0.0
