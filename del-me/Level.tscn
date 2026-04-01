@@ -31,6 +31,11 @@ shadow_enabled = true
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="stage" unique_id=2034107176]
 use_collision = true
 
+[node name="crouch_check2" type="CSGBox3D" parent="stage/CSGCombiner3D" unique_id=2103341049]
+transform = Transform3D(0.8660255, -0.50000006, 0, 0.50000006, 0.8660255, 0, 0, 0, 1, 20.89192, 2.3508544, 20.772125)
+size = Vector3(10, 0.01, 10)
+material = ExtResource("2_b2cq8")
+
 [node name="floor" type="CSGBox3D" parent="stage/CSGCombiner3D" unique_id=1576627307]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 0)
 size = Vector3(100, 0.01, 100)

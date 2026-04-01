@@ -124,6 +124,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("jump") and not hook_controller.is_hook_launched and is_on_floor():
 		velocity.y = jump_velocity
 
+	# apply velocity
 	if dir_input.length() != 0 or is_sliding:
 		var x = dir.x * speed
 		var z = dir.z * speed
@@ -139,13 +140,18 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+	# handle ground-fall velocity carry
+	# NOTE: happens everytime ( should only happen if sliding, and if angle is diagonal )
 	if is_on_floor() and velocity_preland.y < fall_velocity_threshold:
-		var speed_fall = abs(velocity_preland.y)
-		var dir_horizontal = Vector3(velocity_preland.x, 0, velocity_preland.z).normalized()
-		if dir_horizontal == Vector3.ZERO:
-			dir_horizontal = -global_transform.basis.z
-		velocity.x += dir_horizontal.x * speed_fall * 1.0
-		velocity.z += dir_horizontal.z * speed_fall * 1.0
+		var floor_normal = get_floor_normal() # a normal of (0,1,0) is perfectly flat
+		var is_diagonal = floor_normal.dot(Vector3.UP) < 0.95
+		if is_diagonal:
+			var speed_fall = abs(velocity_preland.y)
+			var dir_horizontal = Vector3(velocity_preland.x, 0, velocity_preland.z).normalized()
+			if dir_horizontal == Vector3.ZERO:
+				dir_horizontal = -global_transform.basis.z
+			velocity.x += dir_horizontal.x * speed_fall * 1.0
+			velocity.z += dir_horizontal.z * speed_fall * 1.0
 
 func _process(_delta: float) -> void:
 	
