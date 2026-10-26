@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bekm0kiclx1ue"]
+
+[ext_resource type="Script" uid="uid://casa38rmogppi" path="res://addons/deeno_lib/components/component_manager.gd" id="1_symyc"]
+[ext_resource type="Script" uid="uid://d3wyng3oq3d1s" path="res://addons/deeno_lib/components/input.gd" id="2_abrql"]
+[ext_resource type="Script" uid="uid://chocg5gmqdpir" path="res://addons/deeno_lib/components/velocity.gd" id="3_bls4j"]
+[ext_resource type="Script" uid="uid://dy2r117pu8sue" path="res://addons/deeno_lib/components/player_controller.gd" id="4_fkugw"]
+[ext_resource type="PackedScene" uid="uid://wqfqt2k7v6i7" path="res://addons/deeno_lib/models/mc_basic/mc_basic.tscn" id="5_fkugw"]
+[ext_resource type="PackedScene" uid="uid://bhvsuxqeptv7g" path="res://addons/deeno_lib/models/mc_basic/mc_basic_collision.tscn" id="6_8fjmc"]
+
+[node name="Player" type="CharacterBody3D" unique_id=813704331]
+
+[node name="ComponentManager" type="Node" parent="." unique_id=278077936]
+script = ExtResource("1_symyc")
+metadata/_custom_type_script = "uid://casa38rmogppi"
+
+[node name="InputComponent" type="Node" parent="ComponentManager" unique_id=2135608102]
+script = ExtResource("2_abrql")
+metadata/_custom_type_script = "uid://d3wyng3oq3d1s"
+
+[node name="VelocityComponent" type="Node" parent="ComponentManager" unique_id=239273987]
+script = ExtResource("3_bls4j")
+metadata/_custom_type_script = "uid://chocg5gmqdpir"
+
+[node name="PlayerControllerComponent" type="Node" parent="ComponentManager" unique_id=283203915 node_paths=PackedStringArray("yaw_pivot", "pitch_pivot")]
+script = ExtResource("4_fkugw")
+yaw_pivot = NodePath("../../McBasic/YawPivot")
+pitch_pivot = NodePath("../../McBasic/YawPivot/PitchPivot")
+metadata/_custom_type_script = "uid://dy2r117pu8sue"
+
+[node name="McBasic" parent="." unique_id=577765384 instance=ExtResource("5_fkugw")]
+
+[node name="LeftArmPivot" parent="McBasic/Body" parent_id_path=PackedInt32Array(577765384, 871204218) index="1" unique_id=611136059]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -0.309, 1.238, 0)
+
+[node name="RightArmPivot" parent="McBasic/Body" parent_id_path=PackedInt32Array(577765384, 871204218) index="2" unique_id=757092090]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.309, 1.238, 0)
+
+[node name="McBasicCollision" parent="." unique_id=389839782 instance=ExtResource("6_8fjmc")]
+
+[editable path="McBasic"]

@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://dl7qx3qah7ai0"]
+
+[ext_resource type="Script" uid="uid://c2msjtr0gwip2" path="res://main/main.gd" id="1_53q0u"]
+[ext_resource type="Script" uid="uid://cle5ljxilq1bm" path="res://huds/debug/debug.gd" id="2_pjrb6"]
+
+[node name="Main" type="Node" unique_id=110078230]
+process_mode = 3
+script = ExtResource("1_53q0u")
+
+[node name="Systems" type="Node" parent="." unique_id=1240387484]
+process_mode = 3
+
+[node name="World" type="Node3D" parent="." unique_id=944050179]
+process_mode = 1
+
+[node name="LevelRoot" type="Node3D" parent="World" unique_id=415573443]
+unique_name_in_owner = true
+
+[node name="EntityRoot" type="Node3D" parent="World" unique_id=2117307481]
+unique_name_in_owner = true
+
+[node name="TransitionLayer" type="CanvasLayer" parent="." unique_id=1511187386]
+process_mode = 3
+layer = 10
+
+[node name="HudLayer" type="CanvasLayer" parent="." unique_id=1277296126]
+process_mode = 1
+layer = 20
+
+[node name="PauseLayer" type="CanvasLayer" parent="." unique_id=1811040095]
+process_mode = 2
+layer = 30
+
+[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=2085637234]
+process_mode = 3
+layer = 40
+
+[node name="DebugRoot" type="Control" parent="DebugLayer" unique_id=508969877]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="DebugHud" type="Control" parent="DebugLayer/DebugRoot" unique_id=546874372]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_pjrb6")
+metadata/_custom_type_script = "uid://cle5ljxilq1bm"
+
+[node name="PanelContainer" type="PanelContainer" parent="DebugLayer/DebugRoot/DebugHud" unique_id=842943253]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(329, 0)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 48.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="DebugLayer/DebugRoot/DebugHud/PanelContainer" unique_id=1051772337]
+unique_name_in_owner = true
+layout_mode = 2

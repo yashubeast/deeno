@@ -1,3 +1,6 @@
 [submodule "addons/deeno_lib"]
 	path = addons/deeno_lib
 	url = https://github.com/yashubeast/deeno_lib
+[submodule "addons/deeno_models"]
+	path = addons/deeno_models
+	url = https://github.com/yashubeast/deeno_models
