@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://d3wyng3oq3d1s" path="res://addons/deeno_lib/components/input.gd" id="2_abrql"]
 [ext_resource type="Script" uid="uid://chocg5gmqdpir" path="res://addons/deeno_lib/components/velocity.gd" id="3_bls4j"]
 [ext_resource type="Script" uid="uid://dy2r117pu8sue" path="res://addons/deeno_lib/components/player_controller.gd" id="4_fkugw"]
-[ext_resource type="PackedScene" uid="uid://wqfqt2k7v6i7" path="res://addons/deeno_lib/models/mc_basic/mc_basic.tscn" id="5_fkugw"]
-[ext_resource type="PackedScene" uid="uid://bhvsuxqeptv7g" path="res://addons/deeno_lib/models/mc_basic/mc_basic_collision.tscn" id="6_8fjmc"]
+[ext_resource type="PackedScene" uid="uid://wqfqt2k7v6i7" path="res://addons/deeno_models/entities/mc_basic/mc_basic.tscn" id="5_fkugw"]
+[ext_resource type="PackedScene" uid="uid://bhvsuxqeptv7g" path="res://addons/deeno_models/entities/mc_basic/mc_basic_collision.tscn" id="6_8fjmc"]
 
 [node name="Player" type="CharacterBody3D" unique_id=813704331]
 
@@ -21,10 +21,13 @@ metadata/_custom_type_script = "uid://d3wyng3oq3d1s"
 script = ExtResource("3_bls4j")
 metadata/_custom_type_script = "uid://chocg5gmqdpir"
 
-[node name="PlayerControllerComponent" type="Node" parent="ComponentManager" unique_id=283203915 node_paths=PackedStringArray("yaw_pivot", "pitch_pivot")]
+[node name="PlayerControllerComponent" type="Node" parent="ComponentManager" unique_id=283203915 node_paths=PackedStringArray("yaw_pivot", "pitch_pivot", "camera")]
 script = ExtResource("4_fkugw")
 yaw_pivot = NodePath("../../McBasic/YawPivot")
 pitch_pivot = NodePath("../../McBasic/YawPivot/PitchPivot")
+_zoom_enabled = true
+_shoulder_enabled = true
+camera = NodePath("../../McBasic/YawPivot/PitchPivot/Camera3D")
 metadata/_custom_type_script = "uid://dy2r117pu8sue"
 
 [node name="McBasic" parent="." unique_id=577765384 instance=ExtResource("5_fkugw")]
