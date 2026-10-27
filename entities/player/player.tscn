@@ -4,8 +4,17 @@
 [ext_resource type="Script" uid="uid://d3wyng3oq3d1s" path="res://addons/deeno_lib/components/input.gd" id="2_abrql"]
 [ext_resource type="Script" uid="uid://chocg5gmqdpir" path="res://addons/deeno_lib/components/velocity.gd" id="3_bls4j"]
 [ext_resource type="Script" uid="uid://dy2r117pu8sue" path="res://addons/deeno_lib/components/player_controller.gd" id="4_fkugw"]
+[ext_resource type="Script" uid="uid://bv0ud8yxuxguu" path="res://addons/deeno_lib/components/inventory.gd" id="5_26q78"]
 [ext_resource type="PackedScene" uid="uid://wqfqt2k7v6i7" path="res://addons/deeno_models/entities/mc_basic/mc_basic.tscn" id="5_fkugw"]
 [ext_resource type="PackedScene" uid="uid://bhvsuxqeptv7g" path="res://addons/deeno_models/entities/mc_basic/mc_basic_collision.tscn" id="6_8fjmc"]
+[ext_resource type="Script" uid="uid://ka3e2mn7c6gx" path="res://addons/deeno_lib/components/holder.gd" id="6_bectd"]
+[ext_resource type="Script" uid="uid://ddwlbehmgdrhn" path="res://addons/deeno_lib/items/item_stack.gd" id="7_wvtmh"]
+[ext_resource type="Resource" uid="uid://553lw2b1tecm" path="res://addons/deeno_models/items/deagle/deagle.tres" id="8_7thud"]
+
+[sub_resource type="Resource" id="Resource_26q78"]
+script = ExtResource("7_wvtmh")
+item = ExtResource("8_7thud")
+metadata/_custom_type_script = "uid://ddwlbehmgdrhn"
 
 [node name="Player" type="CharacterBody3D" unique_id=813704331]
 
@@ -30,6 +39,17 @@ _shoulder_enabled = true
 camera = NodePath("../../McBasic/YawPivot/PitchPivot/Camera3D")
 metadata/_custom_type_script = "uid://dy2r117pu8sue"
 
+[node name="HolderComponent" type="Node" parent="ComponentManager" unique_id=184211362 node_paths=PackedStringArray("hand", "aim")]
+script = ExtResource("6_bectd")
+hand = NodePath("../../McBasic/YawPivot/PitchPivot/Marker3D")
+aim = NodePath("../../McBasic/YawPivot/PitchPivot/Camera3D")
+metadata/_custom_type_script = "uid://ka3e2mn7c6gx"
+
+[node name="InventoryComponent" type="Node" parent="ComponentManager" unique_id=1456056675]
+script = ExtResource("5_26q78")
+starting_items = Array[ExtResource("7_wvtmh")]([SubResource("Resource_26q78")])
+metadata/_custom_type_script = "uid://bv0ud8yxuxguu"
+
 [node name="McBasic" parent="." unique_id=577765384 instance=ExtResource("5_fkugw")]
 
 [node name="LeftArmPivot" parent="McBasic/Body" parent_id_path=PackedInt32Array(577765384, 871204218) index="1" unique_id=611136059]
@@ -37,6 +57,12 @@ transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -0.309, 1.2
 
 [node name="RightArmPivot" parent="McBasic/Body" parent_id_path=PackedInt32Array(577765384, 871204218) index="2" unique_id=757092090]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.309, 1.238, 0)
+
+[node name="Camera3D" type="Camera3D" parent="McBasic/YawPivot/PitchPivot" parent_id_path=PackedInt32Array(577765384, 1486767068) index="1" unique_id=1001222312]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22500002, 0)
+
+[node name="Marker3D" type="Marker3D" parent="McBasic/YawPivot/PitchPivot" parent_id_path=PackedInt32Array(577765384, 1486767068) index="2" unique_id=1897772142]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, -0.6)
 
 [node name="McBasicCollision" parent="." unique_id=389839782 instance=ExtResource("6_8fjmc")]
 
